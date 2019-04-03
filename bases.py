@@ -86,6 +86,8 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
+    # Declare max string up to base 36
+    max_string = "0123456789abcdefghijklmnopqrstuvwxyz"
     # TODO: Encode number in binary (base 2)
     # generare exponents until no exponent value is larger than number
     max_power = 0
@@ -97,6 +99,16 @@ def encode(number, base):
     Max power: 6
     Max base token: 2^6 = 64
     """
+    output = ""
+    # As long as there is a value to remove, remove from number
+    while number != 0:
+        # Section inspired by nsafai
+        remainder = number % base
+        output += string.printable[remainder]
+        number = number // base
+
+    print(output[::-1])
+    # End inspired section
 
     # ...
     # TODO: Encode number in hexadecimal (base 16)
@@ -122,6 +134,9 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
+    decoded_input = decode(digits, base1)
+    encoded_output = encode(decoded_input, base2)
+    return encoded_output
 
 
 # def main():
