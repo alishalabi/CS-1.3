@@ -22,9 +22,7 @@ def decode(digits, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     total = 0
     power = len(digits) - 1
-    # print(digits_length)
-    # TODO: Decode digits from binary (base 2)
-    # ...
+    # Decode digits from binary (base 2)
     if base == 2:
         # cycle through every digit in digits
         for digit in digits:
@@ -35,15 +33,48 @@ def decode(digits, base):
             # break
             total += digit * (2 ** power)
             power -= 1
-        print(total)
+        return total
 
-        # print(total)
-        # return total
-
-    # TODO: Decode digits from hexadecimal (base 16)
+    # Decode digits from hexadecimal (base 16)
     # ...
+    if base == 16:
+        for digit in digits:
+            # convert digits to integers
+            if digit.isdigit() == True:
+                digit = int(digit)
+                # add digit to total
+                total += digit * (16 ** power)
+                power -= 1
+            else:
+                digit = digit.lower()
+                digit = string.hexdigits.index(digit)
+                total += digit * (16 ** power)
+                power -= 1
+
+        return total
+
     # TODO: Decode digits from any base (2 up to 36)
     # ...
+    else:
+        max_string = "0123456789abcdefghijklmnopqrstuvwxyz"
+        # Trim down the max string based on "bases" parameter
+        new_string = max_string[:base]
+        # print("New String:")
+        # print(new_string)
+        # Iterate through each digit
+        for digit in digits:
+            # Case: item is digit
+            if digit.isdigit() == True:
+                digit = int(digit)
+                total += digit * (base ** power)
+                power -= 1
+            else:
+                digit = digit.lower()
+                digit = new_string.index(digit)
+                total += digit * (base ** power)
+                power -= 1
+
+        return total
 
 
 def encode(number, base):
@@ -56,6 +87,17 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
+    # generare exponents until no exponent value is larger than number
+    max_power = 0
+    while base ** max_power <= number:
+        max_power += 1
+    max_base_token = base ** max_power
+    """
+    Sample input/output for 87:
+    Max power: 6
+    Max base token: 2^6 = 64
+    """
+
     # ...
     # TODO: Encode number in hexadecimal (base 16)
     # ...
@@ -102,4 +144,4 @@ def convert(digits, base1, base2):
 # if __name__ == '__main__':
 #     main()
 
-decode("01010111", 2)
+decode("A0345", 15)
