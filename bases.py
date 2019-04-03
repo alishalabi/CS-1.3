@@ -67,13 +67,11 @@ def decode(digits, base):
             if digit.isdigit() == True:
                 digit = int(digit)
                 total += digit * (base ** power)
-                power -= 1
             else:
                 digit = digit.lower()
                 digit = new_string.index(digit)
                 total += digit * (base ** power)
-                power -= 1
-
+            power -= 1
         return total
 
 
