@@ -104,10 +104,10 @@ def encode(number, base):
     while number != 0:
         # Section inspired by nsafai
         remainder = number % base
-        output += string.printable[remainder]
+        output += max_string[remainder]
         number = number // base
 
-    print(output[::-1])
+    return output[::-1]
     # End inspired section
 
     # ...
