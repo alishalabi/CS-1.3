@@ -60,41 +60,32 @@ def binary_search_iterative(array, item):
 
 def binary_search_recursive(array, item, left=None, right=None):
     # implement binary search recursively here
+
     # Slice array based on left/right
+    chunk = []
     if right is not None:
         chunk = array[:right]
     elif left is not None:
         chunk = array[left:]
+
     # Exit Scenario: array can no longer be searched, item not in array
     if len(chunk) == 0:
         return None
     half_mark_index = int(len(chunk) / 2)
-    """
-    Expected 1:
-    Expected 2:
-    """
+
     # Exit Scenario: item found
     if chunk.index(item) == half_mark_index:
         return array.index(item)
-    """
-    Expected 1:
-    Expected 2:
-    """
 
     # Recursion Scenario: item occurs in first half of array
     elif chunk.index(item) < half_mark_index:
-        return binary_search_recursive(array, item, None, half_mark_index)
-    """
-    Expected 1:
-    Expected 2:
-    """
+        return binary_search_recursive(array, item, None, array.index(half_mark_index))
+
+    # Recustion Scenario: item does not occur in first half of array
     else:
         # elif chunk.index(item) < half_mark_index:
-        return binary_search_recursive(array, item, half_mark_index, None)
-    """
-    Expected 1:
-    Expected 2:
-    """
+        return binary_search_recursive(array, item, array.index(half_mark_index), None)
+
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
 
