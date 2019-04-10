@@ -49,7 +49,23 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+    # Implement find_index here (iteratively and/or recursively)
+
+    # Edge cases: empty text or empty pattern
+    if len(pattern) == 0:
+        return 0
+    elif len(pattern) > len(text):
+        return None
+
+    # Iterate through every index in text
+    for index in range(len(text)):
+        # Compare whether or not first item in text matches first item in pattern
+        if text[index] == pattern[0]:
+            # Compare the length of the pattern after found index, see if same as pattern
+            if text[index: index + len(pattern)] == pattern:
+                # Exit case: pattern found
+                return index
+    return None
 
 
 def find_all_indexes(text, pattern):
@@ -58,6 +74,27 @@ def find_all_indexes(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+
+    # Instantiate variable to store all indexes
+    all_indexes = []
+
+    # Edge cases: empty text or empty pattern
+    if len(pattern) == 0:
+        for index in range(len(text)):
+            all_indexes.append(index)
+        return all_indexes
+    elif len(pattern) > len(text):
+        return all_indexes
+
+    # Iterate through every index in text (note: only iterating while pattern can still fit in text)
+    for index in range(len(text) - len(pattern) + 1):
+        # Compare whether or not first item in text matches first item in pattern
+        if text[index] == pattern[0]:
+            # Compare the length of the pattern after found index, see if same as pattern
+            if text[index: index + len(pattern)] == pattern:
+                # Exit case: pattern found
+                all_indexes.append(index)
+    return all_indexes
 
 
 def test_string_algorithms(text, pattern):
