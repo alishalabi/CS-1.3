@@ -42,15 +42,24 @@ def is_palindrome_iterative(text):
     # Attempt 2 - Anisha's TA help
     index_left = 0
     index_right = len(text) - 1
+    # Check to see if we have past the midpoint of text
     while index_left != index_right and index_left < index_right:
+
+        # Correct / remove non chars
         if text[index_left] not in string.ascii_lowercase:
             index_left += 1
             continue
+
+        # Correct / remove non chars
         if text[index_right] not in string.ascii_lowercase:
             index_right -= 1
             continue
+
+        # Exit Scenario: left and right do not match, not palindrome
         if text[index_left] != text[index_right]:
             return False
+
+        # Iterate both indexes
         index_left += 1
         index_right -= 1
     return True
