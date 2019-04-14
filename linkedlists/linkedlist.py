@@ -74,12 +74,23 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) - occurs when search index is at the beginning of linked list
+        Worst case running time: O(n) - where n is nodes in linked list,
+        occurs when the search index is at the end of linked list"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+        # Find the node at the given index and return its data
+        # Intialize variable "current index", which we will iterate through
+        current_index = 0
+        # Intialize variable "current item" at head, which we will iterate through
+        current_item = self.head
+        # Iterate through indexes and items, stop once the current_index is equal to the target index
+        while current_index < index:
+            current_item = current_item.next
+            current_index += 1
+        # Return the current item - which corresponds to the item at the search index
+        return current_item
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -105,6 +116,8 @@ class LinkedList(object):
             self.tail.next = new_node
         # Update tail to new node regardless
         self.tail = new_node
+        # Increment self.size
+        self.size += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -120,6 +133,8 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+        # Increment self.size
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -230,4 +245,4 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    test_linked_list()s
+    test_linked_list()
