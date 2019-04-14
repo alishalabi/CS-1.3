@@ -100,7 +100,21 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+        # Find the node before the given index and insert item after it
+        # Intialize variable "current index", which we will iterate through
+        current_index = 0
+        # Intialize variable "current item" at head, which we will iterate through
+        current_item = self.head
+        # Iterate through indexes and items, stop once the current_index is one before to the target index
+        while current_index < index - 1:
+            current_item = current_item.next
+            current_index += 1
+        # Set variable "shifted item", which corresponds to the item that was initially at index
+        shifted_item = current_item.next
+        current_item.next = item
+        item.next = shifted_item
+        # Increase size variable
+        self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -159,9 +173,19 @@ class LinkedList(object):
         using the same node, or raise ValueError if old_item is not found.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Find the node containing the given old_item and replace its
+        # Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        pass
+        # Intialize variable "current item" at head, which we will iterate through
+        current_item = self.head
+        # Intialize variable "next item" at head.next, which we will iterate through
+        next_item = self.head.next
+        # Iterate through current item and next item, stop once the next item is the target item
+        while current_item.next is not None and next_item != old_item:
+            current_item = current_item.next
+            next_item = next_item.next
+        # Item found, replace old item with new item
+        next_item = new_item
+        current_item.next = next_item
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
