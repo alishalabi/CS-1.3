@@ -62,32 +62,61 @@ def binary_search_recursive(array, item, left=None, right=None):
     # implement binary search recursively here
 
     # Slice array based on left/right
-    chunk = []
-    if right is not None:
-        chunk = array[:right]
-    elif left is not None:
-        chunk = array[left:]
+    # chunk = []
+    # if right is not None:
+    #     chunk = array[:right]
+    # elif left is not None:
+    #     chunk = array[left:]
 
-    # Exit Scenario: array can no longer be searched, item not in array
-    if len(chunk) == 0:
-        return None
-    half_mark_index = int(len(chunk) / 2)
+    # # Attempt #1 - Pre-Anisha-OH
+    # # Exit Scenario: array can no longer be searched, item not in array
+    # if len(chunk) == 0:
+    #     return None
+    # half_mark_index = int(len(chunk) / 2)
+    #
+    # # Exit Scenario: item found
+    # if chunk.index(item) == half_mark_index:
+    #     return array.index(item)
+    #
+    # # Recursion Scenario: item occurs in first half of array
+    # elif chunk.index(item) < half_mark_index:
+    #     return binary_search_recursive(array, item, None, array.index(half_mark_index))
+    #
+    # # Recustion Scenario: item does not occur in first half of array
+    # else:
+    #     # elif chunk.index(item) < half_mark_index:
+    #     return binary_search_recursive(array, item, array.index(half_mark_index), None)
+    #
+    # # once implemented, change binary_search to call binary_search_recursive
+    # # to verify that your recursive implementation passes all tests
 
-    # Exit Scenario: item found
-    if chunk.index(item) == half_mark_index:
+    # Attempt #2: Post-Anisha-OH
+    # Set initial values for left and right
+    # Left should initially be first index of array
+    if left == None:
+        left = 0
+    # Right should initially be last index of array
+    if right == None:
+        right = len(array) - 1
+
+    # Find midpoint of remaining array
+    midpoint = left + ((int(right) - int(left)) // 2)
+
+    # Exit Scenario: Midpoint item is target item
+    if item == array[midpoint]:
         return array.index(item)
 
-    # Recursion Scenario: item occurs in first half of array
-    elif chunk.index(item) < half_mark_index:
-        return binary_search_recursive(array, item, None, array.index(half_mark_index))
+    # Exit Scenario: Item Not found
+    if left == right:
+        return None
 
-    # Recustion Scenario: item does not occur in first half of array
-    else:
-        # elif chunk.index(item) < half_mark_index:
-        return binary_search_recursive(array, item, array.index(half_mark_index), None)
+    # Recursion Result: Midpoint is greater than target item
+    elif item < array[midpoint]:
+        return binary_search_recursive(array, item, left, midpoint)
 
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+    # Recustion Result: Midpoint is less than target item
+    elif item > array[midpoint]:
+        return binary_search_recursive(array, item, midpoint + 1, right)
 
 
 # names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
