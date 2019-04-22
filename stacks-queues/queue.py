@@ -31,6 +31,9 @@ class LinkedQueue(object):
         return self.list.length()
 
     def enqueue(self, item):
+        """
+        Complexity: O(1) in all cases
+        """
         self.list.append(item)
 
     def front(self):
@@ -42,6 +45,9 @@ class LinkedQueue(object):
         return self.list.head.data
 
     def dequeue(self):
+        """
+        Complexity: O(1) in all cases
+        """
         # Remove and return front item, if any
         if self.list.is_empty():
             raise ValueError('Queue is empty, cannot dequeue')

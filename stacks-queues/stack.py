@@ -31,6 +31,9 @@ class LinkedStack(object):
         return self.list.size
 
     def push(self, item):
+        """
+        Complexity: O(1) in all cases
+        """
         self.list.prepend(item)
 
     def peek(self):
@@ -42,6 +45,9 @@ class LinkedStack(object):
         return self.list.head.data
 
     def pop(self):
+        """
+        Complexity: O(1) in all cases
+        """
         if self.list.is_empty() == True:
             raise ValueError('Queue is empty, cannot dequeue')
         else:
@@ -80,6 +86,10 @@ class ArrayStack(object):
         return len(self.list)
 
     def push(self, item):
+        """
+        Complexity: O(1) average in all cases, memory re-allocation will decrease
+        in a logarithmic curve (amortized anaylsis)
+        """
         # Insert given item
         self.list.append(item)
 
@@ -92,6 +102,9 @@ class ArrayStack(object):
         return self.list[len(self.list) - 1]
 
     def pop(self):
+        """
+        Complexity: O(1) in all cases
+        """
         #  Remove and return top item, if any
         if self.is_empty() == True:
             raise ValueError('Queue is empty, cannot dequeue')

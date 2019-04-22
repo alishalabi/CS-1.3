@@ -18,6 +18,9 @@ def is_palindrome(text):
 
 
 def is_palindrome_iterative(text):
+    """
+    Complexity: O(n) where n is number of letters in text
+    """
     # implement the is_palindrome function iteratively here
     # convert text to lower case
     text = text.lower()
@@ -69,6 +72,9 @@ def is_palindrome_iterative(text):
 
 
 def is_palindrome_recursive(text, left=None, right=None):
+    """
+    Complexity:
+    """
     # implement the is_palindrome function recursively here
     text = text.lower()
 
