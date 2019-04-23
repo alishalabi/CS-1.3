@@ -78,8 +78,8 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Run time: O(1) average, as size of hastable increases, the number of elements
+        per linkedlist will decrease"""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -104,7 +104,7 @@ class HashTable(object):
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
-    def set(self, key, value):
+    def set(self, key, value=None):
         """Insert or update the given key with its associated value.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
