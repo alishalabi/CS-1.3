@@ -71,7 +71,7 @@ class HashTable(object):
         # Count number of key-value entries in each of the buckets
         item_count = 0
         for bucket in self.buckets:
-            item_count += bucket.length()
+            item_count += bucket.length()  # use size?
         return item_count
         # Equivalent to this list comprehension:
         return sum(bucket.length() for bucket in self.buckets)
