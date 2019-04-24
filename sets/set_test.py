@@ -1,3 +1,5 @@
+# Note: Tests and Sets were collaborated on with https://github.com/nsafai/
+
 from set_hashtable import Set
 import unittest
 
@@ -41,7 +43,7 @@ class SetTest(unittest.TestCase):
         with self.assertRaises(Exception):
             s.add('A')  # Key does not exist
 
-    def remove(self):
+    def test_remove(self):
         """
         remove element from this set, if present, or else raise KeyError
         """
@@ -52,29 +54,71 @@ class SetTest(unittest.TestCase):
         s.remove('I')
         assert self.assertCountEqual(s.keys(), ['V', 'X'])
 
-    def union(self):
+    def test_union(self):
         """
         return a new set that is the union of this set and other_set
         """
-        pass
+        s1 = Set(20)
+        s1.add('I')
+        s1.add('V')
+        s1.add('A')
+        s2 = Set(20)
+        s2.add('I')
+        s2.add('V')
+        union_s = s1.union(s2)
+        self.assertCountEqual(union_s.keys(), ['I', 'V', 'A'])
+        s2.add('B')
+        union_s = s1.union(s2)
+        self.assertCountEqual(union_s.keys(), ['I', 'V', 'A', 'B'])
 
-    def intersection(self):
+    def test_intersection(self):
         """
         return a new set that is the intersection of this set and other_set
         """
-        pass
+        s1 = Set(20)
+        s1.add('I')
+        s1.add('V')
+        s1.add('B')
+        s2 = Set(20)
+        s2.add('I')
+        s2.add('V')
+        intersection_s = s1.intersection(s2)
+        self.assertCountEqual(intersection_s.keys(), ['I', 'V'])
+        s2.add('B')
+        intersection_s = s1.union(s2)
+        self.assertCountEqual(intersection_s.keys(), ['I', 'V', 'B'])
 
-    def difference(self):
+    def test_difference(self):
         """
         return a new set that is the difference of this set and other_set
         """
-        pass
+        s1 = Set(20)
+        s1.add('I')
+        s1.add('V')
+        s1.add('A')
+        s2 = Set(20)
+        s2.add('I')
+        s2.add('V')
+        difference_s = s1.difference(s2)
+        self.assertCountEqual(difference_s.keys(), ['A'])
+        s2.add('B')
+        difference_s = s1.difference(s2)
+        self.assertCountEqual(difference_s.keys(), ['A'])
 
-    def is_subset(self):
+    def test_is_subset(self):
         """
         return a boolean indicating whether other_set is a subset of this set
         """
-        pass
+        s1 = Set(20)
+        s1.add('I')
+        s1.add('V')
+        s1.add('A')
+        s2 = Set(20)
+        s2.add('I')
+        s2.add('V')
+        assert s1.is_subset(s2) == True
+        s2.add('B')
+        assert s1.is_subset(s2) == False
 
     # *----------------------------------------------*
     # Begin Stretch Challenge Tests
@@ -83,12 +127,35 @@ class SetTest(unittest.TestCase):
         """
         check if the buffer is empty
         """
+        # s = Set(5)
+        # assert self.is_empty() == True
+        # s.add("A")
+        # s.add("B")
+        # assert self.is_empty() == False
+        # s.remove("A")
+        # assert self.is_empty() == False
+        # s.remove("B")
+        # assert self.is_empty() == True
         pass
 
     def test_is_full(self):
         """
         check if the buffer is full
         """
+        # s = Set(3)
+        # assert self.test_is_full() == False
+        # s.add("A")
+        # assert self.test_is_full() == False
+        # s.add("B")
+        # assert self.test_is_full() == False
+        # s.add("C")
+        # assert self.test_is_full() == True
+        # with self.assertRaises(Exception):
+        #     s.add("Z")  # Try to add item when full (redundant)
+        # s.remove("A")
+        # assert self.test_is_full() == False
+        # s.remove("B")
+        # assert self.test_is_full() == False
         pass
 
     def test_enqueue(self):
