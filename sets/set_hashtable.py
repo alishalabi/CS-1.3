@@ -37,23 +37,35 @@ class Set(HashTable):
     def union(self, other_set):
         """
         return a new set that is the union of this set and other_set
+        Time-complexity: O(n) where n is number of elements in two sets
         """
         union_set = Set()
         # Append each element in first HT
         for element in self.keys():
-            union_set.append(element)
+            union_set.add(element)
         # Append each element in second HT (duplicates resolved in HT method)
         for element in other_set.keys():
-            union_set.append(element)
+            union_set.add(element)
         return union_set
 
     def intersection(self, other_set):
         """
         return a new set that is the intersection of this set and other_set
         """
+        # Note: optimization worked out with Nicolai during class
         intersection_set = Set()
-        for element in self.keys():
-            if element in other_set.keys():
+
+        # Find smaller set
+        if self.size < other_set.size:
+            smaller_set = self
+            bigger_set = other_set
+        else:
+            smaller_set = other_set
+            bigger_set = self
+
+        # Loop through every item of smaller set to save time
+        for element in smaller_set.keys():
+            if bigger_set.contains(element):
                 intersection_set.set(element)
         return intersection_set
 
@@ -62,8 +74,8 @@ class Set(HashTable):
         return a new set that is the difference of this set and other_set
         """
         difference_set = Set()
-        for element in self.keys():
-            if element not in other_set.keys():
+        for element in self.keys():  # O(n)
+            if element not in other_set.keys():  # O(1)
                 difference_set.set(element)
         for element in other_set.keys():
             if element not in self.keys():
