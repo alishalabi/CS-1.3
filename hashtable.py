@@ -1,7 +1,5 @@
 #!python
-import sys
-sys.path.append("../")
-from linkedlists.linkedlist import LinkedList
+from linkedlist import LinkedList
 
 
 class HashTable(object):

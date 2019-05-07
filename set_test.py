@@ -121,51 +121,51 @@ class SetTest(unittest.TestCase):
         assert s1.is_subset(s2) == False
 
     # *----------------------------------------------*
-    # Begin Stretch Challenge Tests
+    # # Begin Stretch Challenge Tests
+    #
+    # def test_is_empty(self):
+    #     """
+    #     check if the buffer is empty
+    #     """
+    #     # s = Set(5)
+    #     # assert self.is_empty() == True
+    #     # s.add("A")
+    #     # s.add("B")
+    #     # assert self.is_empty() == False
+    #     # s.remove("A")
+    #     # assert self.is_empty() == False
+    #     # s.remove("B")
+    #     # assert self.is_empty() == True
+    #     pass
 
-    def test_is_empty(self):
-        """
-        check if the buffer is empty
-        """
-        # s = Set(5)
-        # assert self.is_empty() == True
-        # s.add("A")
-        # s.add("B")
-        # assert self.is_empty() == False
-        # s.remove("A")
-        # assert self.is_empty() == False
-        # s.remove("B")
-        # assert self.is_empty() == True
-        pass
+    # def test_is_full(self):
+    #     """
+    #     check if the buffer is full
+    #     """
+    #     # s = Set(3)
+    #     # assert self.test_is_full() == False
+    #     # s.add("A")
+    #     # assert self.test_is_full() == False
+    #     # s.add("B")
+    #     # assert self.test_is_full() == False
+    #     # s.add("C")
+    #     # assert self.test_is_full() == True
+    #     # with self.assertRaises(Exception):
+    #     #     s.add("Z")  # Try to add item when full (redundant)
+    #     # s.remove("A")
+    #     # assert self.test_is_full() == False
+    #     # s.remove("B")
+    #     # assert self.test_is_full() == False
+    #     pass
 
-    def test_is_full(self):
-        """
-        check if the buffer is full
-        """
-        # s = Set(3)
-        # assert self.test_is_full() == False
-        # s.add("A")
-        # assert self.test_is_full() == False
-        # s.add("B")
-        # assert self.test_is_full() == False
-        # s.add("C")
-        # assert self.test_is_full() == True
-        # with self.assertRaises(Exception):
-        #     s.add("Z")  # Try to add item when full (redundant)
-        # s.remove("A")
-        # assert self.test_is_full() == False
-        # s.remove("B")
-        # assert self.test_is_full() == False
-        pass
-
-    def test_enqueue(self):
-        """
-        insert item at the back of the buffer
-        """
-        pass
-
-    def test_dequeue(self):
-        """
-        remove and return the item at the front of the buffer
-        """
-        pass
+    # def test_enqueue(self):
+    #     """
+    #     insert item at the back of the buffer
+    #     """
+    #     pass
+    #
+    # def test_dequeue(self):
+    #     """
+    #     remove and return the item at the front of the buffer
+    #     """
+    #     pass

@@ -1,16 +1,16 @@
 #!python
-import sys
-sys.path.append("../")
-from hashtables.hashtable import HashTable
+from hashtable import HashTable
 
 
 class Set(HashTable):
-    def __init__(self, max_size):
+    def __init__(self, max_size=8, items=[]):
         """
         initialize a new circular buffer that can store at most max_size items
         """
         HashTable.__init__(self)
         self.max_size = max_size
+        for item in items:
+            self.add(item)
 
     # Inheriting contains from superclass
     # def contains(element):
@@ -18,6 +18,10 @@ class Set(HashTable):
     #     return a boolean indicating whether element is in this set
     #     """
     #     return element is in self
+
+    def __iter__(self):
+        for item in self.keys():
+            yield item
 
     def add(self, element):
         """

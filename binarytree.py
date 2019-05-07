@@ -270,8 +270,8 @@ class BinarySearchTree(object):
     def _traverse_pre_order_recursive(self, node, visit):
         """Traverse this binary tree with recursive pre-order traversal (DFS).
         Start at the given node and visit each node with the given function.
-        TODO: Running time: ??? Why and under what conditions?
-        TODO: Memory usage: ??? Why and under what conditions?"""
+        Run time: Best case - O(1), list is empty. Worst case - O(n), almost every other case
+        Memory usage: O(log(n)) if balanced, O(n) if unbalanced - n = number of nodes"""
         if node is not None:
             # Visit this node's data with given function
             visit(node.data)
@@ -325,25 +325,29 @@ class BinarySearchTree(object):
         # Return level-order list of all items in tree
         return items
 
+    # Note: inspired by Nathan Pilial's in-class code demo
     def _traverse_level_order_iterative(self, start_node, visit):
         """Traverse this binary tree with iterative level-order traversal (BFS).
         Start at the given node and visit each node with the given function.
-        TODO: Running time: ??? Why and under what conditions?
-        TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Create queue to store nodes not yet traversed in level-order
-        queue = ...
-        # TODO: Enqueue given starting node
-        ...
-        # TODO: Loop until queue is empty
-        while ...:
-            # TODO: Dequeue node at front of queue
-            node = ...
-            # TODO: Visit this node's data with given function
-            ...
-            # TODO: Enqueue this node's left child, if it exists
-            ...
-            # TODO: Enqueue this node's right child, if it exists
-            ...
+        Running time: O(n) in most cases n = number of nodes, O(1) if no items?
+        Memory usage: O(n) (exponentially proportional to height, which is inversally
+        proportional to number of nodes)"""
+        # Create queue to store nodes not yet traversed in level-order
+        queue = Queue()  # Linked List Queue
+        # Enqueue given starting node
+        queue.enqueue(start_node)
+        # Loop until queue is empty
+        while len(queue) > 0:
+            # Dequeue node at front of queue
+            node = queue.dequeue()
+            # Visit this node's data with given function
+            visit(node.data)
+            # Enqueue this node's left child, if it exists
+            if node.left:
+                queue.enqueue(node.left)
+            # Enqueue this node's right child, if it exists
+            if node.right:
+                queue.enqueue(node.right)
 
 
 def test_binary_search_tree():
