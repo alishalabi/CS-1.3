@@ -106,7 +106,7 @@ def test_string_algorithms(text, pattern):
     # Uncomment these lines after you implement find_index
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
-    # Uncomment these lines after you implement find_all_indexes
+    # `Uncomment these lines after you implement find_all_indexes
     indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 

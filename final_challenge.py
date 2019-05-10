@@ -1,4 +1,4 @@
-# Note: Heavily collaborated with nicolaisafai
+# Note: Heavily collaborated with github.com/nsafai
 # We will be using Binarytrees to store parsed routing numbers
 from binarytree import BinaryTreeNode, BinarySearchTree
 
@@ -22,12 +22,14 @@ class CallRouter(object):
     def parse_route_numbers(self, route_numbers_unparsed):
         # Take each line in raw data, deconstruct
         for entry in route_numbers_unparsed:
-            prefix = ...
-            price = ...
+            clean_route = entry(',')
+            prefix = clean_route[0]
+            price = clean_route[1]
         # If not in prefix binary tree, add to binary tree and add to dictionary
             if self.prefixes.contains(prefix) == False:
                 self.prefixes.insert(prefix)
-        # If in prefix binary tree, update compare and update dictionary
+                self.best_prices[prefix] = price
+        # If already in prefix binary tree, update compare and update dictionary
             else:
                 # If stored price is larger than new price
                 if self.best_prices[prefix] > price:
@@ -46,4 +48,11 @@ class CallRouter(object):
         else:
             return 0
 
-    def save_routing_cost(self, phone_number):
+    # Step 3: Record best routing costs results into a readable format
+    def record_routing_costs(self, phone_numbers_parsed):
+        results = []
+        for phone_number in phone_numbers_parsed:
+            cost = self.routing_cost(phone_number)
+            line_item = "{},{}".format(phone_number, cost)
+            results.append(line_item)
+        print(results)

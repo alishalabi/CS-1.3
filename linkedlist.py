@@ -109,14 +109,20 @@ class LinkedList(object):
         if self.is_empty():
             self.head = new_node
             self.tail = new_node
+            self.size += 1
             return
         # Exit Scenario: Index to insert is 0 (head)
         if index == 0:
+            old_node = self.head
             self.prepend(new_node)
+            self.head = new_node
+            self.head.next = old_node
             return
         # Exit Scenario: Index to insert is at end of LL (tail)
         if index == self.size:
-            self.append(item)
+            self.append(new_node)
+            self.tail.next = new_node
+            self.tail = new_node
             return
 
         # Intialize variable "current index", which we will iterate through
@@ -133,7 +139,7 @@ class LinkedList(object):
         new_node.next = current_item.next
         current_item.next = new_node
 
-        # Increase size variable
+        # Increase size
         self.size += 1
 
     def append(self, item):
@@ -195,17 +201,29 @@ class LinkedList(object):
         Worst case running time: O(n) - when old item is at end of LL, where n is number of nodes"""
         # Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
+
+        # Edge Case: Item to replace is head
+        if old_item == self.head.data:
+            self.head.data = new_item
+            return
+
+        # Edge Case: Item to replace it tail
+        if old_item == self.tail.data:
+            self.tail.data = new_item
+            return
+
         # Intialize variable "current item" at head, which we will iterate through
         current_item = self.head
-        # Intialize variable "next item" at head.next, which we will iterate through
-        next_item = self.head.next
+
         # Iterate through current item and next item, stop once the next item is the target item
-        while current_item.next is not None and next_item != old_item:
+        while current_item is not None and current_item.data != old_item:
             current_item = current_item.next
-            next_item = next_item.next
+
+        if current_item == None:
+            raise ValueError('Item does not exist!!!: {}'.format(old_item))
+
         # Item found, replace old item with new item
-        next_item = new_item
-        current_item.next = next_item
+        current_item.data = new_item
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.

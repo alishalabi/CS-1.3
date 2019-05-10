@@ -3,12 +3,11 @@ from hashtable import HashTable
 
 
 class Set(HashTable):
-    def __init__(self, max_size=8, items=[]):
+    def __init__(self, items=[]):
         """
         initialize a new circular buffer that can store at most max_size items
         """
         HashTable.__init__(self)
-        self.max_size = max_size
         for item in items:
             self.add(item)
 
@@ -27,10 +26,11 @@ class Set(HashTable):
         """
         add element to this set, if not present already
         """
-        if self.size < self.max_size:
-            self.set(element)
-        else:
-            raise Exception('Set is full, could not add: {}'.format(element))
+        # if self.size < self.max_size:
+        #     self.set(element)
+        # else:
+        #     raise Exception('Set is full, could not add: {}'.format(element))
+        self.set(element)
 
     def remove(self, element):
         """
@@ -78,9 +78,9 @@ class Set(HashTable):
         return a new set that is the difference of this set and other_set
         """
         difference_set = Set()
-        for element in self.keys():  # O(n)
-            if element not in other_set.keys():  # O(1)
-                difference_set.set(element)
+        # for element in self.keys():  # O(n)
+        #     if element not in other_set.keys():  # O(1)
+        #         difference_set.set(element)
         for element in other_set.keys():
             if element not in self.keys():
                 difference_set.set(element)
