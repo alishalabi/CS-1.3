@@ -13,26 +13,6 @@ def contains(text, pattern):
     elif len(pattern) > len(text):
         return False
 
-    # # Attempt 1:
-    # # Setup a substring/substring index that is the length of the pattern
-    # # Splice the first n items, where n is the length of pattern
-    # current_index = len(pattern) - 1
-    # sub_string = text[:(len(pattern) - 1)]
-    #
-    # # Set while control - current index is less than max index
-    # while current_index <= (len(text) - 1):
-    #    # If found, return true
-    #     if sub_string == pattern:
-    #         return True
-    #     # If does not match pattern: shift substring to the right, check again
-    #     else:
-    #         current_index += 1
-    #         sub_string[1:]
-    #         sub_string += text[current_index]
-    #
-    # # Substring can no longer be shifted: pattern not found
-    # return False
-
     # Attempt 2: working with Ikey
     # Iterate through every index in text
     for index in range(len(text)):
