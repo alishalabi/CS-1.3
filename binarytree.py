@@ -80,7 +80,8 @@ class BinarySearchTree(object):
         """Return an item in this binary search tree matching the given item,
         or None if the given item is not found.
         Best case running time: O(1) if search item is at the root node
-        Worst case running time: O(n) where n is node of tree, occurs when item is not in tree"""        node = self._find_node_recursive(item, self.root)
+        Worst case running time: O(n) where n is node of tree, occurs when item is not in tree"""
+        node = self._find_node_recursive(item, self.root)
         # Return the node's data if found, or None
         if node.data is not None:
             return node.data
@@ -121,7 +122,7 @@ class BinarySearchTree(object):
         # Loop until we descend past the closest leaf node
         while node is not None:
             # Check if the given item matches the node's data
-            if node.data = item:
+            if node.data == item:
                 # Return the found node
                 return node
             # Check if the given item is less than the node's data
@@ -129,7 +130,7 @@ class BinarySearchTree(object):
                 # Descend to the node's left child
                 node = node.left
             # Check if the given item is greater than the node's data
-            elif item < node.data:
+            elif item > node.data:
                 # Descend to the node's right child
                 node = node.right
         # Not found
@@ -185,10 +186,10 @@ class BinarySearchTree(object):
                 parent = node
                 node = node.left
             # Check if the given item is greater than the node's data
-        elif item > node.data:
+            elif item > node.data:
                 # Update the parent and descend to the node's right child
-            parent = node
-            node = node.right
+                parent = node
+                node = node.right
         # Not found
         return parent
 
@@ -226,6 +227,7 @@ class BinarySearchTree(object):
         # TODO: Use helper methods and break this algorithm down into 3 cases
         # based on how many children the node containing the given item has and
         # implement new helper methods for subtasks of the more complex cases
+        pass
 
     def items_in_order(self):
         """Return an in-order list of all items in this binary search tree."""
@@ -255,6 +257,7 @@ class BinarySearchTree(object):
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
         # TODO: Traverse in-order without using recursion (stretch challenge)
+        pass
 
     def items_pre_order(self):
         """Return a pre-order list of all items in this binary search tree."""
@@ -284,6 +287,7 @@ class BinarySearchTree(object):
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
         # TODO: Traverse pre-order without using recursion (stretch challenge)
+        pass
 
     def items_post_order(self):
         """Return a post-order list of all items in this binary search tree."""

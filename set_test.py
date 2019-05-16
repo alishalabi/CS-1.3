@@ -13,6 +13,16 @@ class SetTest(unittest.TestCase):
         s = Set()
         assert s.size == 0
 
+    def test_size(self):
+        s = Set()
+        assert s.size == 0
+        s.add('I')
+        assert s.size == 1
+        s.add('V')
+        assert s.size == 2
+        s.removes('V')
+        assert s.size == 1
+
     def test_contains(self):
         """
         return a boolean indicating whether element is in this set
