@@ -1,3 +1,6 @@
+from queue import Queue
+
+
 class BinaryTreeNode(object):
 
     def __init__(self, data):
@@ -22,6 +25,7 @@ class BinaryTreeNode(object):
 
     def height(self):
         # Note: Recursive logic was inspired by this article - https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/
+        # Additional Syntax insipired by Anisha Jain
         """Return the height of this node (the number of edges on the longest
         downward path from this node to a descendant leaf node).
         Best and worst scenario: O(n) where n is the number of descending nodes"""
@@ -31,16 +35,22 @@ class BinaryTreeNode(object):
             # Check if left child has a value and if so calculate its height
             # left_height = height(node.left)
             # Refactor:
-            left_height = self.left.height()
+            left = 0
             # Check if right child has a value and if so calculate its height
             # right_height = height(node.right)
             # Refactor:
-            right_height = self.right.height()
+            right = 0
+
+            # find right height and left height recursively
+            if self.left != None:
+                left = 1 + self.left.height()
+            if self.right != None:
+                right = 1 + self.right.height()
             # Return one more than the greater of the left height and right height
-            if left_height < right_height:
-                return right_height + 1
+            if left < right:
+                return right
             else:
-                return left_height + 1
+                return left
 
 
 class BinarySearchTree(object):
@@ -83,7 +93,7 @@ class BinarySearchTree(object):
         Worst case running time: O(n) where n is node of tree, occurs when item is not in tree"""
         node = self._find_node_recursive(item, self.root)
         # Return the node's data if found, or None
-        if node.data is not None:
+        if node is not None:
             return node.data
         else:
             return None
@@ -95,13 +105,15 @@ class BinarySearchTree(object):
         # Handle the case where the tree is empty
         if self.is_empty():
             # Create a new root node
-            self.root = item
+            self.root = BinaryTreeNode(item)
             # Increase the tree size
             self.size = 1
             return
+        print(self.root)
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node_recursive(item, self.root)
         # Check if the given item should be inserted left of parent node
+        print(parent)
         if parent.data > item:
             # Create a new node and set the parent's left child
             parent.left = BinaryTreeNode(item)
@@ -152,15 +164,15 @@ class BinarySearchTree(object):
         # Check if the given item is less than the node's data
         elif item < node.data:
             # Recursively descend to the node's left child, if it exists
-            if data.left != None:
-                return _find_node_recursive(self, item, node.left)
+            if node.left != None:
+                return self._find_node_recursive(item, node.left)
             else:
                 return None
         # Check if the given item is greater than the node's data
         elif item > node.data:
             # Recursively descend to the node's right child, if it exists
-            if data.left != None:
-                return _find_node_recursive(self, item, node.right)
+            if node.right != None:
+                return self._find_node_recursive(item, node.right)
             else:
                 return None
 
@@ -204,7 +216,7 @@ class BinarySearchTree(object):
         # Check if starting node exists
         if node is None:
             # Not found (base case)
-            return None
+            return parent
         # Check if the given item matches the node's data
         if node.data == item:
             # Return the parent of the found node
@@ -339,7 +351,7 @@ class BinarySearchTree(object):
         # Enqueue given starting node
         queue.enqueue(start_node)
         # Loop until queue is empty
-        while len(queue) > 0:
+        while queue.length() > 0:
             # Dequeue node at front of queue
             node = queue.dequeue()
             # Visit this node's data with given function
