@@ -95,7 +95,7 @@ class Set(HashTable):
         """
         return a boolean indicating whether other_set is a subset of this set
         """
-        if self.difference(other_set) is None:
+        if self.difference(other_set).size == 0:
             return True
         return False
 

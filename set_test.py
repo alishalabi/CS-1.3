@@ -20,7 +20,7 @@ class SetTest(unittest.TestCase):
         assert s.size == 1
         s.add('V')
         assert s.size == 2
-        s.removes('V')
+        s.remove('V')
         assert s.size == 1
 
     def test_contains(self):
@@ -109,12 +109,13 @@ class SetTest(unittest.TestCase):
         s2.add('I')
         s2.add('V')
         difference_s = s1.difference(s2)
-        self.assertCountEqual(difference_s.keys(), [])
+        assert difference_s.keys() == ["A"]
+        # self.assertCountEqual(difference_s.keys(), [])
         s2.add('B')
         difference_s = s1.difference(s2)
-        self.assertCountEqual(difference_s.keys(), ['B'])
+        self.assertCountEqual(difference_s.keys(), ['A'])
 
-    def test_is_subset(self):
+    def test_is_subset_false(self):
         """
         return a boolean indicating whether other_set is a subset of this set
         """
@@ -129,6 +130,19 @@ class SetTest(unittest.TestCase):
         # assert s2.is_subset(s1) == True
         s2.add('B')
         assert s1.is_subset(s2) == False
+
+    def test_is_subset_true(self):
+        """
+        return a boolean indicating whether other_set is a subset of this set
+        """
+        s1 = Set()
+        s1.add('I')
+        s1.add('V')
+        s2 = Set()
+        s2.add('I')
+        s2.add('V')
+        s2.add('B')
+        assert s1.is_subset(s2) == True
 
     # *----------------------------------------------*
     # # Begin Stretch Challenge Tests
