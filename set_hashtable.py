@@ -23,6 +23,7 @@ class Set(HashTable):
             yield item
 
     def add(self, element):
+        # O(1) average (as we will have an average of 0.75 items in each Hashtable index)
         """
         add element to this set, if not present already
         """
@@ -33,15 +34,16 @@ class Set(HashTable):
         self.set(element)
 
     def remove(self, element):
+        # O(1) average (as we will have an average of 0.75 items in each Hashtable index)
         """
         remove element from this set, if present, or else raise KeyError
         """
         self.delete(element)
 
     def union(self, other_set):
+        # O(n) space and time complexity - where n is the max number of elements
         """
         return a new set that is the union of this set and other_set
-        Time-complexity: O(n) where n is number of elements in two sets
         """
         union_set = Set()
         # Append each element in first HT
@@ -53,6 +55,7 @@ class Set(HashTable):
         return union_set
 
     def intersection(self, other_set):
+        # O(n) space and time complexity, where n is max number of elements in the smaller set
         """
         return a new set that is the intersection of this set and other_set
         """
@@ -74,19 +77,21 @@ class Set(HashTable):
         return intersection_set
 
     def difference(self, other_set):
+        # O(n) space and time complexity, where n is number of elements in set
         """
         return a new set that is the difference of this set and other_set
         """
         difference_set = Set()
-        # for element in self.keys():  # O(n)
-        #     if element not in other_set.keys():  # O(1)
-        #         difference_set.set(element)
-        for element in other_set.keys():
-            if element not in self.keys():
+        for element in self.keys():  # O(n)
+            if element not in other_set.keys():  # O(1)
                 difference_set.set(element)
+        # for element in other_set.keys():
+        #     if element not in self.keys():
+        #         difference_set.set(element)
         return difference_set
 
     def is_subset(self, other_set):
+        # O(n) time and space complexity, where n is the number of elements in our set
         """
         return a boolean indicating whether other_set is a subset of this set
         """
